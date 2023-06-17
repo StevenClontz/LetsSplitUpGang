@@ -1,39 +1,17 @@
 <script lang="ts">
-    import Person from "../components/Person.svelte";
+	import TextareaArray from "../components/TextareaArray.svelte";
     import type { PersonT } from "../types/person.type";
+    import { Button } from 'spaper';
     let persons:PersonT[] = [];
-    let editablePersonIndex:number|undefined;
-    const addPerson = () => {
-        persons = [...persons, {name:`Person ${persons.length+1}`}];
-        editablePersonIndex = persons.length-1;
-    }
-    const savePerson = (index:number) => {
-        editablePersonIndex = undefined;
-        if (persons.length===index+1) {
-            addPerson();
-        }
-    }
-    const deletePerson = (index:number) => {
-        persons = [...persons.slice(0,index),...persons.slice(index+1)];
-        editablePersonIndex = undefined;
-    }
-    addPerson();
+    let personsStringArray:string[] = [];
+    $: persons = personsStringArray.map(s=>{return {name:s}})
 </script>
 
 <h3>Who's here?</h3>
-<p>List the people who will be working!</p>
-{#each persons as person, i}
-    <p>
-        <Person {person}
-            editable={i===editablePersonIndex}
-            on:edit={()=>editablePersonIndex=i}
-            on:save={()=>savePerson(i)}
-            on:delete={()=>deletePerson(i)}/>
-    </p>
-{/each}
+<p>List the people who will be working, one per line below.</p>
 <p>
-    <button on:click={addPerson}>Add another person</button>
+    <TextareaArray bind:arr={personsStringArray}/>
 </p>
 <p>
-    <a href="/groups">Now to form some groups...</a>
+    <Button href="/groups/" type="primary">Now to form some groups...</Button>
 </p>
