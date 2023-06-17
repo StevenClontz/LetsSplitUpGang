@@ -15,6 +15,7 @@
             {text: "Groups"},
             {text: "Votes"},
             {text: "Decisions"},
+            {text: "Summary"},
         ]
     } else if ($page.url.pathname === "/about") {
         items = [
@@ -27,6 +28,7 @@
             {text: "Groups", href:"/groups"},
             {text: "Votes"},
             {text: "Decisions"},
+            {text: "Summary"},
         ]
     } else if ($page.url.pathname === "/votes") {
         items = [
@@ -34,6 +36,7 @@
             {text: "Groups", href:"/groups"},
             {text: "Votes", href:"/votes"},
             {text: "Decisions"},
+            {text: "Summary"},
         ]
     } else if ($page.url.pathname === "/decisions") {
         items = [
@@ -41,6 +44,15 @@
             {text: "Groups", href:"/groups"},
             {text: "Votes", href:"/votes"},
             {text: "Decisions", href:"/decisions"},
+            {text: "Summary"},
+        ]
+    } else if ($page.url.pathname === "/summary") {
+        items = [
+            {text: "People", href:"/"},
+            {text: "Groups", href:"/groups"},
+            {text: "Votes", href:"/votes"},
+            {text: "Decisions", href:"/decisions"},
+            {text: "Summary", href:"/summary"},
         ]
     } else {
         items = [

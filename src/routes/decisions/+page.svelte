@@ -67,6 +67,6 @@
         <Button isLink href="/votes" outline="primary">&laquo; Actually, time for a recount.</Button>
     </div>
     <div class="sm-6 col text-right">
-        <Button isLink href="/locations" type="secondary">Let's get to work! &raquo;</Button>
+        <Button isLink href="/summary" type="secondary">Let's get to work! &raquo;</Button>
     </div>
 </div>

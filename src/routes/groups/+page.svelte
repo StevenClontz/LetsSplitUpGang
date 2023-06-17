@@ -9,7 +9,7 @@
             p.name = s;
             return p
         } else {
-            return {name: s, votes: 0, personNames: []}
+            return {name: s, votes: 0, personNames: [], notes: ""}
         }
     })
 </script>

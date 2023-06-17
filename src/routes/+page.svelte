@@ -1,7 +1,7 @@
 <script lang="ts">
 	import TextareaArray from "../components/TextareaArray.svelte";
     import { Button } from 'spaper';
-    import { persons } from "../stores";
+    import { persons, groups } from "../stores";
     let personsStringArray:string[] = $persons.map(p=>p.name);
     $: $persons = personsStringArray.map((s,i) => {
         if (i < $persons.length) {
@@ -11,6 +11,10 @@
         } else {
             return {name: s}
         }
+    })
+    $: $groups = $groups.map(g=>{
+        g.personNames=g.personNames.filter(n=>$persons.map(p=>p.name).includes(n))
+        return g
     })
 </script>
 
