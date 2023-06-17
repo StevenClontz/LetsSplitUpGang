@@ -1,20 +1,18 @@
 <script lang="ts">
+	import TextareaArray from "../../components/TextareaArray.svelte";
     import type { WorkingGroupT } from "../../types/workingGroup.type";
     import { Button } from 'spaper';
     let groups:WorkingGroupT[] = [];
-    let groupsRaw:string = "";
-    // $: persons = personsRaw.split("\n").map(s=>{
-    //     return {name: s}
-    // }).filter(p=>p.name!=="")
+    let groupsStringArray:string[] = [];
+    $: groups = groupsStringArray.map(s=>{return {name:s}})
 </script>
 
-<h3>What's going on?</h3>
+<h3>What do we want to do?</h3>
 <p>Create a list of potential working groups, one per line below.</p>
 <p>
-    <textarea 
-        style={`resize:none;width:100%;height:${(groupsRaw.split(/\n/).length+3)*1.1}em`} 
-        bind:value={groupsRaw}/>
+    <TextareaArray bind:value={groupsStringArray}/>
 </p>
 <p>
-    <Button href="/groups/" type="primary">Now to form some groups...</Button>
+    <Button href="/groups/" type="primary">How many folks would do these?</Button>
+    <Button href="/" outline="primary">Back to naming folks...</Button>
 </p>

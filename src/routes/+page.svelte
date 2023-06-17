@@ -10,7 +10,7 @@
 <h3>Who's here?</h3>
 <p>List the people who will be working, one per line below.</p>
 <p>
-    <TextareaArray bind:arr={personsStringArray}/>
+    <TextareaArray bind:value={personsStringArray}/>
 </p>
 <p>
     <Button href="/groups/" type="primary">Now to form some groups...</Button>
