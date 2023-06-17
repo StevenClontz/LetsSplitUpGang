@@ -6,7 +6,7 @@
 
 <h3>Time to get things done!</h3>
 
-<p>Get cracking, you titans of industry/education/podcasting/whatever!</p>
+<p>Get away with it, you meddling kids!</p>
 
 <div class="row">
     {#each viableGroups($groups,{considerMembers:true}) as group}
