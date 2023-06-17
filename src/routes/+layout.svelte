@@ -1,7 +1,7 @@
 <script lang="ts">
     import 'papercss/dist/paper.min.css';
     import { onMount } from 'svelte';
-    import { Skeleton, Breadcrumb } from 'spaper';
+    import { Skeleton, Breadcrumb, Hero } from 'spaper';
     import { page } from '$app/stores';
     import type { BreadcrumbItemT } from '../types/breadcrumbItem.type';
     onMount(() => {
@@ -11,8 +11,10 @@
     let items:BreadcrumbItemT[] = [];
     $: if ($page.url.pathname === "/") {
         items = [
-            {text: "Home", href:"/"},
-            {text: "People"},
+            {text: "People", href:"/"},
+            {text: "Groups"},
+            {text: "Votes"},
+            {text: "Decisions"},
         ]
     } else if ($page.url.pathname === "/about") {
         items = [
@@ -21,24 +23,24 @@
         ]
     } else if ($page.url.pathname === "/groups") {
         items = [
-            {text: "Home", href:"/"},
-            {text: "People", href:"/"},
-            {text: "Groups"},
-        ]
-    } else if ($page.url.pathname === "/votes") {
-        items = [
-            {text: "Home", href:"/"},
             {text: "People", href:"/"},
             {text: "Groups", href:"/groups"},
             {text: "Votes"},
+            {text: "Decisions"},
         ]
-    } else if ($page.url.pathname === "/decisions") {
+    } else if ($page.url.pathname === "/votes") {
         items = [
-            {text: "Home", href:"/"},
             {text: "People", href:"/"},
             {text: "Groups", href:"/groups"},
             {text: "Votes", href:"/votes"},
             {text: "Decisions"},
+        ]
+    } else if ($page.url.pathname === "/decisions") {
+        items = [
+            {text: "People", href:"/"},
+            {text: "Groups", href:"/groups"},
+            {text: "Votes", href:"/votes"},
+            {text: "Decisions", href:"/decisions"},
         ]
     } else {
         items = [
@@ -49,7 +51,7 @@
 </script>
   
 <main class="container container-lg paper">
-    <h1 style="margin-top:0">Let's Split Up, Gang!</h1>
+    <Hero type="primary" title="Let's Split Up, Gang!" />
     {#if loading}
         <div class="container container-md"><Skeleton active={loading} /></div>
         <Skeleton active={loading} --width="5rem" --height="3rem" />

@@ -26,9 +26,14 @@
     <a href="/">naming your people</a>, and your team will be on task in no time.
     Jenkees!
 </p>
-<p class="text-center">
-    <Button size="small" outline="secondary" href="/">Let's get started!</Button>
-</p>
 <p>
-    <small><a href="https://clontz.org">Steven</a> made this, blame him.</small>
+    <Button isLink type="secondary" href="/">Let's get started!</Button>
 </p>
+<div class="container container-xs paper padding-small">
+    <p class="text-center">
+        <small>
+            <a href="https://clontz.org">Steven</a> made this, blame him.
+            <Button isLink size="small" outline="primary" href="https://github.com/StevenClontz/LetsSplitUpGang">GitHub</Button>
+        </small>
+    </p>
+</div>

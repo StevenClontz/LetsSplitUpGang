@@ -1,6 +1,6 @@
 <script lang="ts">
 	import TextareaArray from "../components/TextareaArray.svelte";
-    import { Button, Breadcrumb } from 'spaper';
+    import { Button } from 'spaper';
     import { persons } from "../stores";
     let personsStringArray:string[] = $persons.map(p=>p.name);
     $: $persons = personsStringArray.map((s,i) => {
@@ -15,11 +15,20 @@
 </script>
 
 <h3>Who's here?</h3>
-<p>List the people who will be working, one per line below.</p>
+<p>List the names for your team of people who need to be sorted into working groups, one per line below.</p>
 <p>
     <TextareaArray bind:value={personsStringArray}/>
 </p>
-<p>
-    <Button href="/groups" type="secondary" disabled={$persons.length<2}>Let's form some groups...</Button>
-    <Button href="/about" outline="primary" disabled={$persons.length<2}>What, what?</Button>
-</p>
+<div class="row flex-edges">
+    <div class="sm-6 col">
+        <Button isLink href="/about" outline="primary">What, what?</Button>
+    </div>
+    <div class="sm-6 col text-right">
+        <Button isLink 
+            href={$persons.length<2?"#":"/groups"} 
+            type="secondary" 
+            disabled={$persons.length<2}>
+            And those groups are... &raquo;
+        </Button>
+    </div>
+</div>
