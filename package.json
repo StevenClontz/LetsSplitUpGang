@@ -34,6 +34,7 @@
 	"type": "module",
 	"dependencies": {
 		"papercss": "^1.9.2",
-		"spaper": "^1.1.1"
+		"spaper": "^1.1.1",
+		"svelte-local-storage-store": "^0.5.0"
 	}
 }
