@@ -41,7 +41,7 @@
             {#each group.personNames as name}<Badge>{name}</Badge> {:else}(none){/each}
             </p>
         <p><Input placeholder="Filter people" bind:value={filterText} /></p>
-        <fieldset class="form-group" style="max-height:6em;overflow-y:scroll">
+        <fieldset class="form-group">
             {#each searchResults(filterText) as person}   
                 <Checkbox 
                     label={person.name} 
