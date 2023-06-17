@@ -1,16 +1,6 @@
 <script lang="ts">
     import { Button } from 'spaper';
     import { groups } from "../../stores";
-    let groupsStringArray:string[] = $groups.map(g=>g.name);
-    $: $groups = groupsStringArray.map((s,i) => {
-        if (i < $groups.length) {
-            let p = $groups[i];
-            p.name = s;
-            return p
-        } else {
-            return {name: s, votes: 0}
-        }
-    })
 </script>
 
 <h3>Hang on, what is this?</h3>
