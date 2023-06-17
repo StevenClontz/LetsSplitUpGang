@@ -20,5 +20,5 @@
     <TextareaArray bind:value={personsStringArray}/>
 </p>
 <p>
-    <Button href="/groups/" type="primary">Now to form some groups...</Button>
+    <Button disabled={$persons.length<2} href="/groups/" type="primary">Now to form some groups...</Button>
 </p>
