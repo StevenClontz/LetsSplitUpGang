@@ -28,15 +28,18 @@
 </p>
 {#each viableGroups($groups) as group, i}
     <Collapsible 
-        label={`${group.name} (${group.votes} votes)`} 
+        label={`${group.name} (${group.votes} votes, ${group.personNames.length} members)`} 
         open={openGroup===i} 
         on:open={()=>openGroup=i}>
         <h3>
             {group.name}
             <Badge type="warning" rounded>{group.votes} votes</Badge>
-            <Badge type="success" rounded>{group.personNames.length} members</Badge>
+            <Badge type={group.personNames.length>1?"success":"primary"} rounded>{group.personNames.length} members</Badge>
         </h3>
-        <p>Members: {#each group.personNames as name}<Badge>{name}</Badge> {/each}</p>
+        <p>
+            Members:
+            {#each group.personNames as name}<Badge>{name}</Badge> {:else}(none){/each}
+            </p>
         <p><Input placeholder="Filter people" bind:value={filterText} /></p>
         <fieldset class="form-group" style="max-height:6em;overflow-y:scroll">
             {#each searchResults(filterText) as person}   
@@ -57,6 +60,6 @@
         <Button isLink href="/votes" outline="primary">&laquo; Actually, time for a recount.</Button>
     </div>
     <div class="sm-6 col text-right">
-        <Button isLink href="/locations" type="secondary">Where are we meeting? &raquo;</Button>
+        <Button isLink href="/locations" type="secondary">Let's get to work! &raquo;</Button>
     </div>
 </div>
