@@ -1,6 +1,5 @@
 <script lang="ts">
-	import TextareaArray from "../../components/TextareaArray.svelte";
-    import { Button, Breadcrumb } from 'spaper';
+    import { Button } from 'spaper';
     import { groups } from "../../stores";
     let groupsStringArray:string[] = $groups.map(g=>g.name);
     $: $groups = groupsStringArray.map((s,i) => {
@@ -26,6 +25,9 @@
     for working group selection. Follow the instructions, starting with
     <a href="/">naming your people</a>, and your team will be on task in no time.
     Jenkees!
+</p>
+<p class="text-center">
+    <Button size="small" outline="secondary" href="/">Let's get started!</Button>
 </p>
 <p>
     <small><a href="https://clontz.org">Steven</a> made this, blame him.</small>
