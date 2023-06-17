@@ -1,10 +1,17 @@
 <script lang="ts">
 	import TextareaArray from "../components/TextareaArray.svelte";
-    import type { PersonT } from "../types/person.type";
     import { Button } from 'spaper';
-    let persons:PersonT[] = [];
-    let personsStringArray:string[] = [];
-    $: persons = personsStringArray.map(s=>{return {name:s}})
+    import { persons } from "../stores";
+    let personsStringArray:string[] = $persons.map(p=>p.name);
+    $: $persons = personsStringArray.map((s,i) => {
+        if (i < $persons.length) {
+            let p = $persons[i];
+            p.name = s;
+            return p
+        } else {
+            return {name: s}
+        }
+    })
 </script>
 
 <h3>Who's here?</h3>

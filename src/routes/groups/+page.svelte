@@ -1,10 +1,17 @@
 <script lang="ts">
 	import TextareaArray from "../../components/TextareaArray.svelte";
-    import type { GroupT } from "../../types/group.type";
     import { Button } from 'spaper';
-    let groups:GroupT[] = [];
-    let groupsStringArray:string[] = [];
-    $: groups = groupsStringArray.map(s=>{return {name:s}})
+    import { groups } from "../../stores";
+    let groupsStringArray:string[] = $groups.map(g=>g.name);
+    $: $groups = groupsStringArray.map((s,i) => {
+        if (i < $groups.length) {
+            let p = $groups[i];
+            p.name = s;
+            return p
+        } else {
+            return {name: s}
+        }
+    })
 </script>
 
 <h3>What do we want to do?</h3>
