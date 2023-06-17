@@ -7,11 +7,14 @@
 	import type { PersonT } from '../../types/person.type';
     let openGroup = 0;
     let filterText = "";
-    const searchResults = (ft:string):PersonT[] => {
+    const searchResults = (ft:string,group:GroupT):PersonT[] => {
+        const ps = $persons.filter((p)=>{
+            return $groups.filter(g=>g.name!==group.name && g.personNames.includes(p.name)).length === 0
+        })
         if (ft==="") {
-            return $persons
+            return ps
         } else {
-            return fuzzysort.go(ft,$persons,{key:"name"}).map(r=>r.obj)
+            return fuzzysort.go(ft,ps,{key:"name"}).map(r=>r.obj)
         }
     }
 </script>
@@ -42,7 +45,7 @@
             </p>
         <p><Input placeholder="Filter people" bind:value={filterText} /></p>
         <fieldset class="form-group">
-            {#each searchResults(filterText) as person}   
+            {#each searchResults(filterText,group) as person}   
                 <Checkbox 
                     label={person.name} 
                     checked={group?.personNames.includes(person.name)} 
@@ -50,7 +53,11 @@
                     on:change={_=>$groups=$groups}
                     bind:group={group.personNames} />
             {:else}
-                <p>No names matching <code>{filterText}</code> were found.</p>
+                {#if filterText===""}
+                    <p>Everyone has already decided on other groups!</p>
+                {:else}
+                    <p>No undecided names matching <code>{filterText}</code> were found.</p>
+                {/if}
             {/each}
         </fieldset>
     </Collapsible>
