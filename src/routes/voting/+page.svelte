@@ -11,6 +11,6 @@
 {/each}
 </Form>
 <p>
-    <Button href="/commit/" type="secondary">Time to decide!</Button>
-    <Button href="/groups/" outline="primary">Er, let's take another look at those groups...</Button>
+    <Button href="/decide" type="secondary">Time to decide!</Button>
+    <Button href="/groups" outline="primary">Er, let's take another look at those groups...</Button>
 </p>
