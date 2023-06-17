@@ -17,18 +17,33 @@
             return fuzzysort.go(ft,ps,{key:"name"}).map(r=>r.obj)
         }
     }
+    const resetDecisions = () => {
+        $groups = $groups.map((g) => {
+            g.personNames = [];
+            return g;
+        })
+    }
 </script>
 
 <h3>Choices, choices...</h3>
-<p>
-    Starting with the group that recieved the least votes (but at least two),
-    everyone simultaneously chooses whether to commit to working in that group, or
-    waiting to participate in a more popular group.
-</p>
-<p>
-    If enough people
-    commit to the group, it runs — otherwise, they can join another group.
-</p>
+<div class="row flex-edges padding-none">
+    <div class="sm-10 col padding-none">
+        <p>
+            Starting with the group that recieved the least votes (but at least two),
+            everyone simultaneously chooses whether to commit to working in that group, or
+            waiting to participate in a more popular group.
+        </p>
+        <p>
+            If enough people
+            commit to the group, it runs — otherwise, they can join another group.
+        </p>
+    </div>
+    <div class="sm-2 col text-right padding-none">
+        <p>
+            <Button on:click={resetDecisions} size="small" outline="danger">Reset all decisions.</Button>
+        </p>
+    </div>
+</div>
 {#each viableGroups($groups) as group, i}
     <Collapsible 
         label={`${group.name} (${group.votes} votes, ${group.personNames.length} members)`} 

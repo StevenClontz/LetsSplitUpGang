@@ -6,6 +6,8 @@
 
 <h3>Time to get things done!</h3>
 
+<p>Get cracking, you titans of industry/education/podcasting/whatever!</p>
+
 <div class="row">
     {#each viableGroups($groups,{considerMembers:true}) as group}
         <div class="sm-6 md-4 col paper padding-small">

@@ -2,7 +2,7 @@
     import { Button, Slider, Form } from 'spaper';
     import { groups, persons } from "../../stores";
     import { viableGroups } from "../../utils";
-    const resetVotes = (_:Event) => {
+    const resetVotes = () => {
         $groups = $groups.map((g) => {
             g.votes = 0;
             return g;
