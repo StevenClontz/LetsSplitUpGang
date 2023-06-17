@@ -9,7 +9,7 @@
             p.name = s;
             return p
         } else {
-            return {name: s}
+            return {name: s, votes: 0}
         }
     })
 </script>
@@ -20,6 +20,6 @@
     <TextareaArray bind:value={groupsStringArray}/>
 </p>
 <p>
-    <Button href="/groups/" type="primary">How many folks would do these?</Button>
+    <Button href="/voting/" type="secondary" disabled={$groups.length<2}>Now for the popularity contest...</Button>
     <Button href="/" outline="primary">Back to naming folks...</Button>
 </p>
