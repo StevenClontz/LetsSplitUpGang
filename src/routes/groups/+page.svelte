@@ -1,8 +1,8 @@
 <script lang="ts">
 	import TextareaArray from "../../components/TextareaArray.svelte";
-    import type { WorkingGroupT } from "../../types/workingGroup.type";
+    import type { GroupT } from "../../types/group.type";
     import { Button } from 'spaper';
-    let groups:WorkingGroupT[] = [];
+    let groups:GroupT[] = [];
     let groupsStringArray:string[] = [];
     $: groups = groupsStringArray.map(s=>{return {name:s}})
 </script>
