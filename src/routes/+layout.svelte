@@ -11,28 +11,40 @@
     let items:BreadcrumbItemT[] = [];
     $: if ($page.url.pathname === "/") {
         items = [
+            {text: "Home", href:"/"},
             {text: "People"},
+        ]
+    } else if ($page.url.pathname === "/about") {
+        items = [
+            {text: "Home", href:"/"},
+            {text: "About"},
         ]
     } else if ($page.url.pathname === "/groups") {
         items = [
+            {text: "Home", href:"/"},
             {text: "People", href:"/"},
             {text: "Groups"},
         ]
-    } else if ($page.url.pathname === "/voting") {
+    } else if ($page.url.pathname === "/votes") {
         items = [
+            {text: "Home", href:"/"},
             {text: "People", href:"/"},
             {text: "Groups", href:"/groups"},
-            {text: "Voting"},
+            {text: "Votes"},
         ]
-    } else if ($page.url.pathname === "/decide") {
+    } else if ($page.url.pathname === "/decisions") {
         items = [
+            {text: "Home", href:"/"},
             {text: "People", href:"/"},
             {text: "Groups", href:"/groups"},
-            {text: "Voting", href:"/voting"},
-            {text: "Decide"},
+            {text: "Votes", href:"/votes"},
+            {text: "Decisions"},
         ]
     } else {
-        items = [{text: "Zoinks!"}]
+        items = [
+            {text: "Home", href:"/"},
+            {text: "Zoinks!"},
+        ]
     }
 </script>
   

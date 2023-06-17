@@ -4,7 +4,10 @@
 </script>
 
 <h3>How excited are we about these?</h3>
-<p>Get a rough count of how many people would participate in each group if they could.</p>
+<p>
+    Get a rough count of how many people would participate in each group if they could.
+    
+</p>
 <Form>
 {#each $groups as group}
     <Slider block label={group.name} min={0} max={$persons.length} bind:value={group.votes}/>

@@ -20,6 +20,6 @@
     <TextareaArray bind:value={groupsStringArray}/>
 </p>
 <p>
-    <Button href="/voting" type="secondary" disabled={$groups.length<2}>Now for the popularity contest...</Button>
+    <Button href="/votes" type="secondary" disabled={$groups.length<2}>Now for the popularity contest...</Button>
     <Button href="/" outline="primary">Back to naming folks...</Button>
 </p>

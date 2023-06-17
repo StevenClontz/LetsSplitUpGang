@@ -21,4 +21,5 @@
 </p>
 <p>
     <Button href="/groups" type="secondary" disabled={$persons.length<2}>Let's form some groups...</Button>
+    <Button href="/about" outline="primary" disabled={$persons.length<2}>What, what?</Button>
 </p>
