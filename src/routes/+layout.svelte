@@ -49,7 +49,7 @@
 </script>
   
 <main class="container container-lg paper">
-    <h1>Let's Split Up, Gang!</h1>
+    <h1 style="margin-top:0">Let's Split Up, Gang!</h1>
     {#if loading}
         <div class="container container-md"><Skeleton active={loading} /></div>
         <Skeleton active={loading} --width="5rem" --height="3rem" />

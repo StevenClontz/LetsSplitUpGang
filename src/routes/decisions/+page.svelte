@@ -1,15 +1,19 @@
 <script lang="ts">
     import { Button, Slider, Form } from 'spaper';
     import { groups, persons } from "../../stores";
+    import type { GroupT } from "../types/group.type";
+    let sortedGroups:GroupT[] = $groups;
 </script>
 
-<h3>How excited are we about these?</h3>
+<h3>I choose you!</h3>
 <p>
-    Get a rough count of how many people would participate in each group if they could.
-    
+    Starting with the group that recieved the least votes,
+    each person chooses whether to commit to working in that group or
+    waiting to participate in a more popular group. If enough people
+    commit to the group, it runs - otherwise they can join another group.
 </p>
 <Form>
-{#each $groups as group}
+{#each sortedGroups as group}
     <Slider block label={group.name} min={0} max={$persons.length} bind:value={group.votes}/>
 {/each}
 </Form>
