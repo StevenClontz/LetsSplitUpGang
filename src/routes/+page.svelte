@@ -20,8 +20,8 @@
     })
 </script>
 
-<h3>Who's here?</h3>
-<p>List the names for your team of people who need to be sorted into working groups, one per line below.</p>
+<h3>Who are you?</h3>
+<p>List the names to be sorted into working groups, one per line below.</p>
 <p>
     <TextareaArray bind:value={personsStringArray}/>
 </p>
@@ -29,13 +29,17 @@
 <BottomNav>
     <BottomNavItem>
         <Button isLink 
-            href={$persons.length<2?"#":"/groups"} 
             type="secondary" 
+            href={$persons.length<2?"#":"/groups"} 
             disabled={$persons.length<2}>
-            And those groups are... &raquo;
+            We got some work to do now... &raquo;
         </Button>
     </BottomNavItem>
     <BottomNavItem>
-        <Button isLink href="/about" outline="primary">What, what?</Button>
+        <Button isLink 
+            href="/about"
+            outline="primary">
+            What, what?
+        </Button>
     </BottomNavItem>
 </BottomNav>

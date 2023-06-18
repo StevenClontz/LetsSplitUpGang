@@ -10,29 +10,39 @@
     $: $groups = $groups
 </script>
 
-<h3>Time to get things done!</h3>
+<h3>Get away with it, you meddling kids!</h3>
 
-<p>Get away with it, you meddling kids!</p>
+<p>
+    You can add any notes you want for each group (such as where the group will meet).
+</p>
 
 <div class="row">
     {#each decidedGroups as group}
-        <div class="sm-6 md-4 col paper padding-small">
-            <h4 class="margin-small">{group.name}</h4>
-            <ul>
-                {#each group.personNames as name}
-                    <li>{name}</li>
-                {/each}
-            </ul>
-            <textarea 
-                style={`resize:none;width:100%;height:${(group.notes?.split("\n").length+2)*1.15}em`} 
-                placeholder="(notes)"
-                bind:value={group.notes}/>
+        <div class="sm-6 md-4 col padding-small">
+            <div class="paper padding-small">
+                <h4 class="margin-small">{group.name}</h4>
+                <ul>
+                    {#each group.personNames as name}
+                        <li>{name}</li>
+                    {/each}
+                </ul>
+                <textarea 
+                    style={`resize:none;width:100%;height:${(group.notes?.split("\n").length+2)*1.15}em`} 
+                    placeholder="(notes)"
+                    bind:value={group.notes}/>
+            </div>
         </div>
     {/each}
 </div>
 
 <BottomNav>
     <BottomNavItem>
-        <Button isLink href="/decisions" outline="primary">&laquo; Are you sure about that, Scoob?</Button>
+        <Button isLink href="/decisions" outline="primary">&laquo; Ruh roh, something's not right.</Button>
+    </BottomNavItem>
+</BottomNav>
+
+<BottomNav>
+    <BottomNavItem>
+        <Button isLink href="/" outline="success">&laquo;&laquo; Time for a reboot.</Button>
     </BottomNavItem>
 </BottomNav>

@@ -11,7 +11,7 @@
     let items:BreadcrumbItemT[] = [];
     $: if ($page.url.pathname === "/") {
         items = [
-            {text: "People", href:"/"},
+            {text: "People", href:"#"},
             {text: "Groups"},
             {text: "Votes"},
             {text: "Decisions"},
@@ -20,12 +20,12 @@
     } else if ($page.url.pathname === "/about") {
         items = [
             {text: "Home", href:"/"},
-            {text: "About"},
+            {text: "About", href:"#"},
         ]
     } else if ($page.url.pathname === "/groups") {
         items = [
             {text: "People", href:"/"},
-            {text: "Groups", href:"/groups"},
+            {text: "Groups", href:"#"},
             {text: "Votes"},
             {text: "Decisions"},
             {text: "Summary"},
@@ -34,7 +34,7 @@
         items = [
             {text: "People", href:"/"},
             {text: "Groups", href:"/groups"},
-            {text: "Votes", href:"/votes"},
+            {text: "Votes", href:"#"},
             {text: "Decisions"},
             {text: "Summary"},
         ]
@@ -43,7 +43,7 @@
             {text: "People", href:"/"},
             {text: "Groups", href:"/groups"},
             {text: "Votes", href:"/votes"},
-            {text: "Decisions", href:"/decisions"},
+            {text: "Decisions", href:"#"},
             {text: "Summary"},
         ]
     } else if ($page.url.pathname === "/summary") {
@@ -52,12 +52,12 @@
             {text: "Groups", href:"/groups"},
             {text: "Votes", href:"/votes"},
             {text: "Decisions", href:"/decisions"},
-            {text: "Summary", href:"/summary"},
+            {text: "Summary", href:"#"},
         ]
     } else {
         items = [
             {text: "Home", href:"/"},
-            {text: "Zoinks!"},
+            {text: "Zoinks!", href:"#"},
         ]
     }
 </script>

@@ -14,13 +14,17 @@
     $: enoughGroups = $groups.filter(g=>viable(g)).length>1
 </script>
 
-<h3>How excited are we about these?</h3>
+<h3>Don't hold back!</h3>
 <div class="row flex-edges padding-none">
     <div class="sm-10 col padding-none">
-        Get at least a rough count of how many people would participate in each group if they could.
+        <p>
+            Get at least a rough count of how many people would participate in each group if they could.
+        </p>
     </div>
     <div class="sm-2 col text-right padding-none">
-        <Button on:click={resetVotes} size="small" outline="danger">Reset all votes.</Button>
+        <p>
+            <Button on:click={resetVotes} size="small" outline="danger">Reset all votes.</Button>
+        </p>
     </div>
 </div>
 <Form>
@@ -35,7 +39,7 @@
             type="secondary" 
             href={enoughGroups?"/decisions":"#"}
             disabled={!enoughGroups}>
-            Time to decide! &raquo;
+            You're ready and you're willing. &raquo;
         </Button>
     </BottomNavItem>
     <BottomNavItem>

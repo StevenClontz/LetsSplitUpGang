@@ -16,9 +16,9 @@
     })
 </script>
 
-<h3>What do we want to do?</h3>
+<h3>We got some work to do now...</h3>
 <p>
-    Create a list of potential working groups to sort your team into, one per line below.
+    List the tasks/topics to be tackled by each working group, one per line below.
     (Don't know what these should be? Try asking your team!)
 </p>
 <p>
@@ -27,7 +27,13 @@
 
 <BottomNav>
     <BottomNavItem>
-        <Button isLink href="/votes" type="secondary" disabled={$groups.length<2}>Now for the popularity contest... &raquo;</Button>
+        <Button 
+            isLink
+            type="secondary"
+            href={$groups.length<2?"#":"/votes"}
+            disabled={$groups.length<2}>
+            Don't hold back! &raquo;
+        </Button>
     </BottomNavItem>
     <BottomNavItem>
         <Button isLink href="/" outline="primary">&laquo; Oops, we forgot someone...</Button>
