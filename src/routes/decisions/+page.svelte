@@ -15,7 +15,7 @@
         filterText = "";
     }
     let viableGroups:GroupT[];
-    $: viableGroups = $groups.filter(g=>viable(g))
+    $: viableGroups = $groups.filter(g=>viable(g)).sort((a,b)=>a.votes-b.votes)
     const matchingPersons = (ft:string,group:GroupT):PersonT[] => {
         const ps = $persons.filter((p)=>{
             return !viableGroups.some(
