@@ -5,6 +5,8 @@
     import { viableGroups } from '../../utils';
 	import type { GroupT } from '../../types/group.type';
 	import type { PersonT } from '../../types/person.type';
+    import BottomNav from '../../components/BottomNav.svelte';
+    import BottomNavItem from '../../components/BottomNavItem.svelte';  
     let openGroup = 0;
     let filterText = "";
     const searchResults = (ft:string,group:GroupT):PersonT[] => {
@@ -77,11 +79,13 @@
         </fieldset>
     </Collapsible>
 {/each}
-<div class="row flex-edges">
-    <div class="sm-6 col">
-        <Button isLink href="/votes" outline="primary">&laquo; Actually, time for a recount.</Button>
-    </div>
-    <div class="sm-6 col text-right">
+
+
+<BottomNav>
+    <BottomNavItem>
         <Button isLink href="/summary" type="secondary">Let's get to work! &raquo;</Button>
-    </div>
-</div>
+    </BottomNavItem>
+    <BottomNavItem>
+        <Button isLink href="/votes" outline="primary">&laquo; Actually, time for a recount.</Button>
+    </BottomNavItem>
+</BottomNav>

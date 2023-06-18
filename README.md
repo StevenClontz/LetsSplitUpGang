@@ -23,4 +23,4 @@ pnpm run preview
 ```
 
 The site will be built and deployed to GitHub Pages
-automatically upon each push.
+automatically upon each push to main.

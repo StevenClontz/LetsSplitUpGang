@@ -1,6 +1,7 @@
 <script lang="ts">
     import { Button } from 'spaper';
-    import { groups } from "../../stores";
+    import BottomNav from '../../components/BottomNav.svelte';
+    import BottomNavItem from '../../components/BottomNavItem.svelte';
 </script>
 
 <h3>Hang on, what is this?</h3>
@@ -16,9 +17,13 @@
     <a href="/">naming your people</a>, and your team will be on task in no time.
     Jenkees!
 </p>
-<p>
-    <Button isLink type="secondary" href="/">Let's get started!</Button>
-</p>
+
+<BottomNav>
+    <BottomNavItem>
+        <Button isLink type="secondary" href="/">Let's get started!</Button>
+    </BottomNavItem>
+</BottomNav>
+
 <div class="container container-xs paper padding-small">
     <p class="text-center">
         <small>

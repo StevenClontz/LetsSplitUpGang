@@ -2,6 +2,8 @@
     import { groups } from "../../stores";
     import { Button } from "spaper";
     import { viableGroups } from '../../utils';
+    import BottomNav from "../../components/BottomNav.svelte";
+    import BottomNavItem from "../../components/BottomNavItem.svelte";
 </script>
 
 <h3>Time to get things done!</h3>
@@ -25,8 +27,8 @@
     {/each}
 </div>
 
-<div class="row flex-edges">
-    <div class="sm-6 col">
+<BottomNav>
+    <BottomNavItem>
         <Button isLink href="/decisions" outline="primary">&laquo; Are you sure about that, Scoob?</Button>
-    </div>
-</div>
+    </BottomNavItem>
+</BottomNav>

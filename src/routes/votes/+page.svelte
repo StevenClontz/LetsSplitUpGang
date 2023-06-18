@@ -1,5 +1,7 @@
 <script lang="ts">
     import { Button, Slider, Form } from 'spaper';
+    import BottomNav from '../../components/BottomNav.svelte';
+    import BottomNavItem from '../../components/BottomNavItem.svelte';
     import { groups, persons } from "../../stores";
     import { viableGroups } from "../../utils";
     const resetVotes = () => {
@@ -24,16 +26,17 @@
     <Slider block label={group.name} min={0} max={$persons.length} bind:value={group.votes}/>
 {/each}
 </Form>
-<div class="row flex-edges">
-    <div class="sm-6 col">
-        <Button isLink href="/groups" outline="primary">&laquo; Er, let's take another look at those groups...</Button>
-    </div>
-    <div class="sm-6 col text-right">
+
+<BottomNav>
+    <BottomNavItem>
         <Button isLink 
             href={viableGroups($groups).length<2?"#":"/decisions"}
             type="secondary" 
             disabled={viableGroups($groups).length<2}>
             Time to decide! &raquo;
         </Button>
-    </div>
-</div>
+    </BottomNavItem>
+    <BottomNavItem>
+        <Button isLink href="/groups" outline="primary">&laquo; Er, let's take another look at those groups...</Button>
+    </BottomNavItem>
+</BottomNav>

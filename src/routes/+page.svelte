@@ -1,5 +1,7 @@
 <script lang="ts">
 	import TextareaArray from "../components/TextareaArray.svelte";
+    import BottomNav from "../components/BottomNav.svelte";
+    import BottomNavItem from "../components/BottomNavItem.svelte";
     import { Button } from 'spaper';
     import { persons, groups } from "../stores";
     let personsStringArray:string[] = $persons.map(p=>p.name);
@@ -23,16 +25,17 @@
 <p>
     <TextareaArray bind:value={personsStringArray}/>
 </p>
-<div class="row flex-edges">
-    <div class="sm-6 col">
-        <Button isLink href="/about" outline="primary">What, what?</Button>
-    </div>
-    <div class="sm-6 col text-right">
+
+<BottomNav>
+    <BottomNavItem>
         <Button isLink 
             href={$persons.length<2?"#":"/groups"} 
             type="secondary" 
             disabled={$persons.length<2}>
             And those groups are... &raquo;
         </Button>
-    </div>
-</div>
+    </BottomNavItem>
+    <BottomNavItem>
+        <Button isLink href="/about" outline="primary">What, what?</Button>
+    </BottomNavItem>
+</BottomNav>

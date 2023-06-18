@@ -1,5 +1,7 @@
 <script lang="ts">
 	import TextareaArray from "../../components/TextareaArray.svelte";
+    import BottomNav from "../../components/BottomNav.svelte";
+    import BottomNavItem from "../../components/BottomNavItem.svelte";
     import { Button } from 'spaper';
     import { groups } from "../../stores";
     let groupsStringArray:string[] = $groups.map(g=>g.name);
@@ -22,11 +24,12 @@
 <p>
     <TextareaArray bind:value={groupsStringArray}/>
 </p>
-<div class="row flex-edges">
-    <div class="sm-6 col">
-        <Button isLink href="/" outline="primary">&laquo; Oops, we forgot someone...</Button>
-    </div>
-    <div class="sm-6 col text-right">
+
+<BottomNav>
+    <BottomNavItem>
         <Button isLink href="/votes" type="secondary" disabled={$groups.length<2}>Now for the popularity contest... &raquo;</Button>
-    </div>
-</div>
+    </BottomNavItem>
+    <BottomNavItem>
+        <Button isLink href="/" outline="primary">&laquo; Oops, we forgot someone...</Button>
+    </BottomNavItem>
+</BottomNav>
