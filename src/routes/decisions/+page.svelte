@@ -1,23 +1,39 @@
 <script lang="ts">
     import { Button, Badge, Collapsible, Input, Checkbox } from 'spaper';
-    import fuzzysort from 'fuzzysort'
+    import fuzzysort from 'fuzzysort';
     import { groups, persons } from "../../stores";
-    import { viableGroups } from '../../utils';
 	import type { GroupT } from '../../types/group.type';
 	import type { PersonT } from '../../types/person.type';
     import BottomNav from '../../components/BottomNav.svelte';
     import BottomNavItem from '../../components/BottomNavItem.svelte';  
+	import { viable } from '../../utils';
     let openGroup = 0;
     let filterText = "";
-    const searchResults = (ft:string,group:GroupT):PersonT[] => {
+    let viableGroups:GroupT[];
+    $: viableGroups = $groups.filter(g=>viable(g))
+    const matchingPersons = (ft:string,group:GroupT):PersonT[] => {
         const ps = $persons.filter((p)=>{
-            return $groups.filter(g=>g.name!==group.name && g.personNames.includes(p.name)).length === 0
+            return !viableGroups.some(
+                g=>g.name!==group.name && g.personNames.includes(p.name)
+            )
         })
         if (ft==="") {
             return ps
-        } else {
-            return fuzzysort.go(ft,ps,{key:"name"}).map(r=>r.obj)
         }
+        return fuzzysort.go(ft,ps,{key:"name"}).map(r=>r.obj)
+    }
+    const selectAll = (ft:string,group:GroupT) => {
+        group.personNames = [...new Set([
+            ...group.personNames, 
+            ...matchingPersons(ft,group).map(p=>p.name)
+        ])];
+        $groups = $groups;
+    }
+    const unselectAll = (ft:string,group:GroupT) => {
+        group.personNames = group.personNames.filter(
+            n=>!matchingPersons(ft,group).map(p=>p.name).includes(n)
+        )
+        $groups = $groups;
     }
     const resetDecisions = () => {
         $groups = $groups.map((g) => {
@@ -25,6 +41,7 @@
             return g;
         })
     }
+    $: $groups = $groups;
 </script>
 
 <h3>Choices, choices...</h3>
@@ -37,7 +54,7 @@
         </p>
         <p>
             If enough people
-            commit to the group, it runs — otherwise, they can join another group.
+            commit to the group, it runs — otherwise, they can join one of the later groups.
         </p>
     </div>
     <div class="sm-2 col text-right padding-none">
@@ -46,7 +63,7 @@
         </p>
     </div>
 </div>
-{#each viableGroups($groups) as group, i}
+{#each viableGroups as group, i}
     <Collapsible 
         label={`${group.name} (${group.votes} votes, ${group.personNames.length} members)`} 
         open={openGroup===i} 
@@ -60,14 +77,18 @@
             Members:
             {#each group.personNames as name}<Badge>{name}</Badge> {:else}(none){/each}
             </p>
-        <p><Input placeholder="Filter people" bind:value={filterText} /></p>
+        <p>
+            <Input placeholder="Filter people" bind:value={filterText} />
+            <Button on:click={()=>selectAll(filterText,group)} size="small">Select all</Button>
+            <Button on:click={()=>unselectAll(filterText,group)} size="small">Unselect all</Button>
+            {#if filterText!==""}<Button on:click={()=>filterText=""} size="small">Remove filter</Button>{/if}
+        </p>
         <fieldset class="form-group">
-            {#each searchResults(filterText,group) as person}   
+            {#each matchingPersons(filterText,group) as person}   
                 <Checkbox 
                     label={person.name} 
                     checked={group?.personNames.includes(person.name)} 
                     value={person.name}
-                    on:change={_=>$groups=$groups}
                     bind:group={group.personNames} />
             {:else}
                 {#if filterText===""}

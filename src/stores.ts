@@ -1,4 +1,5 @@
 import { persisted } from 'svelte-local-storage-store'
+import { derived } from 'svelte/store';
 import type { PersonT } from "./types/person.type";
 import type { GroupT } from "./types/group.type";
 

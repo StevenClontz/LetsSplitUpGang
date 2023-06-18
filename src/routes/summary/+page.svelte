@@ -1,9 +1,13 @@
 <script lang="ts">
     import { groups } from "../../stores";
+    import type { GroupT } from "../../types/group.type";
     import { Button } from "spaper";
-    import { viableGroups } from '../../utils';
     import BottomNav from "../../components/BottomNav.svelte";
     import BottomNavItem from "../../components/BottomNavItem.svelte";
+	import { decided } from "../../utils";
+    let decidedGroups:GroupT[];
+    $: decidedGroups = $groups.filter(g=>decided(g))
+    $: $groups = $groups
 </script>
 
 <h3>Time to get things done!</h3>
@@ -11,7 +15,7 @@
 <p>Get away with it, you meddling kids!</p>
 
 <div class="row">
-    {#each viableGroups($groups,{considerMembers:true}) as group}
+    {#each decidedGroups as group}
         <div class="sm-6 md-4 col paper padding-small">
             <h4 class="margin-small">{group.name}</h4>
             <ul>

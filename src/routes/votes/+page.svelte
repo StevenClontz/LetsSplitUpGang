@@ -3,13 +3,15 @@
     import BottomNav from '../../components/BottomNav.svelte';
     import BottomNavItem from '../../components/BottomNavItem.svelte';
     import { groups, persons } from "../../stores";
-    import { viableGroups } from "../../utils";
+	import { viable } from '../../utils';
     const resetVotes = () => {
         $groups = $groups.map((g) => {
             g.votes = 0;
             return g;
         })
     }
+    let enoughGroups:boolean;
+    $: enoughGroups = $groups.filter(g=>viable(g)).length>1
 </script>
 
 <h3>How excited are we about these?</h3>
@@ -30,13 +32,17 @@
 <BottomNav>
     <BottomNavItem>
         <Button isLink 
-            href={viableGroups($groups).length<2?"#":"/decisions"}
             type="secondary" 
-            disabled={viableGroups($groups).length<2}>
+            href={enoughGroups?"/decisions":"#"}
+            disabled={!enoughGroups}>
             Time to decide! &raquo;
         </Button>
     </BottomNavItem>
     <BottomNavItem>
-        <Button isLink href="/groups" outline="primary">&laquo; Er, let's take another look at those groups...</Button>
+        <Button isLink 
+            href="/groups" 
+            outline="primary">
+            &laquo; Er, let's take another look at those groups...
+        </Button>
     </BottomNavItem>
 </BottomNav>
