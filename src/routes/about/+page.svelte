@@ -13,9 +13,8 @@
 </p>
 <p>
     This simple app implements the <a href="https://aimath.org">AIM model</a>
-    for working group selection. Follow the instructions, starting with
-    <a href="/">naming your people</a>, and your team will be on task in no time.
-    Jenkees!
+    for working group selection. Follow the instructions, 
+    and your team will be on task in no time. Jenkees!
 </p>
 
 <BottomNav>
