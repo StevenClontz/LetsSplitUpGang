@@ -61,10 +61,6 @@
         ]
     }
 </script>
-
-<svelte:head>
-    <title>Let's Split Up, Gang!</title> 
-</svelte:head>
   
 <main class="container container-lg paper">
     <Hero type="primary" title="Let's Split Up, Gang!" />

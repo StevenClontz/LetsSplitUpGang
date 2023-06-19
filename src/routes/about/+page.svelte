@@ -12,10 +12,22 @@
     for your team?
 </p>
 <p>
-    This simple app implements the <a href="https://aimath.org">AIM model</a>
-    for working group selection. Follow the instructions, 
+    This simple app implements the model for working group selection popularized by
+    <a href="https://aimath.org/workshops/about/">AIM Workshops</a>. Follow the instructions, 
     and your team will be on task in no time. Jenkees!
 </p>
+
+<div class="row flex-center">
+    <div class="md-3 col text-center">
+        <img src="/assets/unsorted.png" alt="Unsorted team" class="border-white" width="100%"/>
+    </div>
+    <div class="md-3 col text-center">
+        <img src="/assets/arrow.png" alt="arrow" class="border-white" width="100%"/>
+    </div>
+    <div class="md-3 col text-center">
+        <img src="/assets/sorted.png" alt="Sorted groups" class="border-white" width="100%"/>
+    </div>
+</div>
 
 <BottomNav>
     <BottomNavItem>
