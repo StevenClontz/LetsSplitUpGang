@@ -19,13 +19,16 @@
 </p>
 
 <div class="row flex-center flex-middle">
-    <div class="md-3 col text-center">
+    <div class="sm-5 md-3 col text-center">
         <img src="/assets/unsorted.png" alt="Unsorted team" class="border-white" width="100%"/>
     </div>
-    <div class="md-1 col text-center">
+    <div class="col text-center show-sm">
         ➜
     </div>
-    <div class="md-3 col text-center">
+    <div class="col text-center hide-sm">
+        🠗
+    </div>
+    <div class="sm-5 md-3 col text-center">
         <img src="/assets/sorted.png" alt="Sorted groups" class="border-white" width="100%"/>
     </div>
 </div>
@@ -47,3 +50,20 @@
 <p class="text-center">
     <ResetAppButton/>
 </p>
+
+<style>
+    .show-sm {
+        display:inline;
+    }
+    .hide-sm {
+        display:none;
+    }
+    @media only screen and (max-width: 768px) {
+        .show-sm {
+            display:none;
+        }
+        .hide-sm {
+            display:inline;
+        }
+    }
+</style>
