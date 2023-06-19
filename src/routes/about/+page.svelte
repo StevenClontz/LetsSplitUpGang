@@ -23,10 +23,10 @@
         <img src="/assets/unsorted.png" alt="Unsorted team" class="border-white" width="100%"/>
     </div>
     <div class="col text-center show-sm">
-        ➜
+        ⇨
     </div>
     <div class="col text-center hide-sm">
-        🠗
+        ⇩
     </div>
     <div class="sm-5 md-3 col text-center">
         <img src="/assets/sorted.png" alt="Sorted groups" class="border-white" width="100%"/>
@@ -54,9 +54,11 @@
 <style>
     .show-sm {
         display:inline;
+        font-size:2em;
     }
     .hide-sm {
         display:none;
+        font-size:2em;
     }
     @media only screen and (max-width: 768px) {
         .show-sm {
