@@ -18,12 +18,12 @@
     and your team will be on task in no time. Jenkees!
 </p>
 
-<div class="row flex-center">
+<div class="row flex-center flex-middle">
     <div class="md-3 col text-center">
         <img src="/assets/unsorted.png" alt="Unsorted team" class="border-white" width="100%"/>
     </div>
-    <div class="md-3 col text-center">
-        <img src="/assets/arrow.png" alt="arrow" class="border-white" width="100%"/>
+    <div class="md-1 col text-center">
+        ➜
     </div>
     <div class="md-3 col text-center">
         <img src="/assets/sorted.png" alt="Sorted groups" class="border-white" width="100%"/>
