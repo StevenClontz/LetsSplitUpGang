@@ -85,7 +85,7 @@
             {#each group.personNames as name}<Badge>{name}</Badge> {:else}(none){/each}
             </p>
         <p>
-            <Input placeholder="Filter people" bind:value={filterText} />
+            <Input style="display:inline-block" placeholder="Filter people" bind:value={filterText} />
             <Button on:click={()=>selectAll(filterText,group)} size="small">Select all</Button>
             <Button on:click={()=>unselectAll(filterText,group)} size="small">Unselect all</Button>
             {#if filterText!==""}<Button on:click={()=>filterText=""} size="small">Remove filter</Button>{/if}

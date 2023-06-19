@@ -2,6 +2,7 @@
     import { Button } from 'spaper';
     import BottomNav from '../../components/BottomNav.svelte';
     import BottomNavItem from '../../components/BottomNavItem.svelte';
+    import ResetAppButton from '../../components/ResetAppButton.svelte';
 </script>
 
 <h3>Hang on, what is this?</h3>
@@ -43,3 +44,6 @@
         </small>
     </p>
 </div>
+<p class="text-center">
+    <ResetAppButton/>
+</p>
