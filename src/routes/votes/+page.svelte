@@ -29,7 +29,7 @@
 </div>
 <Form>
 {#each $groups as group}
-    <Slider block label={group.name} min={0} max={$persons.length} bind:value={group.votes}/>
+    <Slider style="margin-bottom:2em;" block label={group.name} min={0} max={$persons.length} bind:value={group.votes}/>
 {/each}
 </Form>
 
