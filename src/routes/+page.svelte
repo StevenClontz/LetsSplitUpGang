@@ -39,7 +39,7 @@
         <Button isLink 
             href="/about"
             outline="primary">
-            What, what?
+            Wait, what?
         </Button>
     </BottomNavItem>
 </BottomNav>
