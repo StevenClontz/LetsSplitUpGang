@@ -55,7 +55,7 @@
 <div class="row flex-edges padding-none">
     <div class="sm-10 col padding-none">
         <p>
-            Starting with the group that recieved the least votes (but at least two),
+            Starting with the group that received the least votes (but at least two),
             everyone simultaneously chooses whether to commit to working in that group, or
             waiting to participate in a more popular group.
         </p>
