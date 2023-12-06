@@ -9,7 +9,10 @@
     $: decidedGroups = $groups.filter(g=>decided(g))
     $: $groups = $groups
     $: markdown = decidedGroups.map(
-        g => `## ${g.name}\n` + g.personNames.map(n=>`- ${n}`).join(`\n`) + `\n`
+        g => `## ${g.name}\n\n` +
+          g.personNames.map(n=>`- ${n}`).join(`\n`) + 
+          `\n\n` + g.notes +
+          `\n`
     ).join("\n")
 </script>
 
@@ -41,7 +44,7 @@
 <div class="row">
 <div class="md-2"/>
 <div class="md-8 col padding-small">
-    <h4>Participant list in Markdown</h4>
+    <h4>Markdown Summary</h4>
     <textarea readonly style="width:100%;height:5em" value={markdown}/>
 </div>
 </div>
