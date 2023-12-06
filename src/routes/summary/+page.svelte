@@ -8,6 +8,9 @@
     let decidedGroups:GroupT[];
     $: decidedGroups = $groups.filter(g=>decided(g))
     $: $groups = $groups
+    $: markdown = decidedGroups.map(
+        g => `## ${g.name}\n` + g.personNames.map(n=>`- ${n}`).join(`\n`) + `\n`
+    ).join("\n")
 </script>
 
 <h3>Get away with it, you meddling kids!</h3>
@@ -34,6 +37,15 @@
         </div>
     {/each}
 </div>
+
+<div class="row">
+<div class="md-2"/>
+<div class="md-8 col padding-small">
+    <h4>Participant list in Markdown</h4>
+    <textarea readonly style="width:100%;height:5em" value={markdown}/>
+</div>
+</div>
+
 
 <BottomNav>
     <BottomNavItem>
