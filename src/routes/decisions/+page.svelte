@@ -2,53 +2,77 @@
     import { Button, Badge, Collapsible, Input, Checkbox } from 'spaper';
     import fuzzysort from 'fuzzysort';
     import { groups, persons } from "../../stores";
-	import type { GroupT } from '../../types/group.type';
-	import type { PersonT } from '../../types/person.type';
     import BottomNav from '../../components/BottomNav.svelte';
     import BottomNavItem from '../../components/BottomNavItem.svelte';  
-	import { viable } from '../../utils';
-    let openGroup = 0;
+	import { viable, decided } from '../../utils';
+
+
+    let openGroupIndex = 0;
     let filterText = "";
-	import { decided } from "../../utils";
-    const toggleGroup = (i:number) => {
-        openGroup = i;
+    const toggleGroup = (groupIndex:number) => {
+        openGroupIndex = groupIndex;
         filterText = "";
     }
-    let viableGroups:GroupT[];
+
     $: viableGroups = $groups.filter(g=>viable(g)).sort((a,b)=>a.votes-b.votes)
-    const matchingPersons = (ft:string,group:GroupT):PersonT[] => {
-        const ps = $persons.filter((p)=>{
-            return !viableGroups.some(
-                g=>g.name!==group.name && g.personNames.includes(p.name)
-            )
-        })
-        if (ft==="") {
-            return ps
-        }
-        return fuzzysort.go(ft,ps,{key:"name"}).map(r=>r.obj)
-    }
-    const selectAll = (ft:string,group:GroupT) => {
-        group.personNames = [...new Set([
-            ...group.personNames, 
-            ...matchingPersons(ft,group).map(p=>p.name)
+    $: groupedPersonNames = viableGroups.map(g=>g.personNames).flat()
+    $: availablePersons = $persons.filter(p=>
+        viableGroups[openGroupIndex].personNames.includes(p.name) || 
+        !groupedPersonNames.includes(p.name)
+    )
+    $: matchingPersons = filterText === "" ? availablePersons : 
+        fuzzysort.go(filterText,availablePersons,{key:"name"}).map(r=>r.obj)
+
+    const selectAll = () => {
+        viableGroups[openGroupIndex].personNames = [...new Set([
+            ...viableGroups[openGroupIndex].personNames, 
+            ...matchingPersons.map(p=>p.name)
         ])];
-        $groups = $groups;
+        viableGroups=viableGroups;
     }
-    const unselectAll = (ft:string,group:GroupT) => {
-        group.personNames = group.personNames.filter(
-            n=>!matchingPersons(ft,group).map(p=>p.name).includes(n)
+    const unselectAll = () => {
+        viableGroups[openGroupIndex].personNames = viableGroups[openGroupIndex].personNames.filter(
+            n=>!matchingPersons.map(p=>p.name).includes(n)
         )
-        $groups = $groups;
+        viableGroups=viableGroups;
     }
     const resetDecisions = () => {
         $groups = $groups.map((g) => {
             g.personNames = [];
             return g;
         })
+        $groups=$groups;
+        viableGroups=viableGroups;
     }
-    $: $groups = $groups;
-    let enoughGroups:boolean;
-    $: enoughGroups = $groups.some(g=>decided(g));
+    const toggleMatchingPerson = () => {
+        if (matchingPersons.length > 0) {
+            // toggle matching name
+            const matchingName = matchingPersons[0].name
+            if (viableGroups[openGroupIndex].personNames.includes(matchingName)) {
+                viableGroups[openGroupIndex].personNames = viableGroups[openGroupIndex].personNames.filter(
+                    n => n !== matchingName
+                )
+            } else {
+                viableGroups[openGroupIndex].personNames = [...new Set([
+                    ...viableGroups[openGroupIndex].personNames, 
+                    matchingName
+                ])];
+            }
+        } else {
+            // add name to persons and group
+            $persons = [
+                ...$persons,
+                {name: filterText}
+            ]
+            viableGroups[openGroupIndex].personNames = [...new Set([
+                ...viableGroups[openGroupIndex].personNames, 
+                filterText
+            ])];
+        }
+        viableGroups=viableGroups;
+    }
+    $: enoughGroups = viableGroups.some(g=>decided(g));
+    $: $groups=$groups
 </script>
 
 <h3>You're ready and you're willing.</h3>
@@ -70,33 +94,31 @@
         </p>
     </div>
 </div>
-{#each viableGroups as group, i}
+
+{#each viableGroups as group, groupIndex}
     <Collapsible 
         label={`${group.name} (${group.votes} votes, ${group.personNames.length} members)`} 
-        open={openGroup===i} 
-        on:open={_=>toggleGroup(i)}>
-        <h4>
-            {group.name}
-            <Badge type="warning" rounded>{group.votes} votes</Badge>
-            <Badge type={group.personNames.length>1?"success":"primary"} rounded>{group.personNames.length} members</Badge>
-        </h4>
+        open={openGroupIndex===groupIndex} 
+        on:open={_=>toggleGroup(groupIndex)}>
         <p>
             Members:
-            {#each group.personNames as name}<Badge>{name}</Badge> {:else}(none){/each}
+            {#each viableGroups[openGroupIndex].personNames as name}<Badge>{name}</Badge> {:else}(none){/each}
             </p>
+            <form on:submit|preventDefault={toggleMatchingPerson}>
+                <Input style="display:inline-block" placeholder="Filter people" bind:value={filterText} />
+            </form>
         <p>
-            <Input style="display:inline-block" placeholder="Filter people" bind:value={filterText} />
-            <Button on:click={()=>selectAll(filterText,group)} size="small">Select all</Button>
-            <Button on:click={()=>unselectAll(filterText,group)} size="small">Unselect all</Button>
+            <Button on:click={selectAll} size="small">Select all</Button>
+            <Button on:click={unselectAll} size="small">Unselect all</Button>
             {#if filterText!==""}<Button on:click={()=>filterText=""} size="small">Remove filter</Button>{/if}
         </p>
         <fieldset class="form-group">
-            {#each matchingPersons(filterText,group) as person}   
+            {#each matchingPersons as person} 
                 <Checkbox 
                     label={person.name} 
-                    checked={group?.personNames.includes(person.name)} 
+                    checked={viableGroups[openGroupIndex]?.personNames.includes(person.name)} 
                     value={person.name}
-                    bind:group={group.personNames} />
+                    bind:group={viableGroups[openGroupIndex].personNames} />
             {:else}
                 {#if filterText===""}
                     <p>Everyone has already decided on other groups!</p>
